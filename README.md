@@ -5,65 +5,146 @@
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 > **卸载虾出品** 🦞💥  
-> 一键彻底卸载 OpenClaw - 温柔地说再见
+> 一键彻底卸载 OpenClaw - **先存档，再告别**
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/dukaworks/openclaw-uninstaller/main/assets/goodbye.gif" alt="Goodbye" width="400">
 </p>
 
-## ✨ 特性
+## ✨ 新特性：联动快照
 
-| 特性 | 描述 |
-|------|------|
-| 🦞 **可爱的 CLI** | 彩色界面 + 动画效果，卸载也能很有趣 |
-| 💾 **智能备份** | 自动备份配置，随时欢迎回来 |
-| 🧹 **彻底清理** | 删除所有文件、服务、环境变量 |
-| 🛑 **安全停止** | 自动停止运行中的服务 |
-| 🔍 **残留检测** | 扫描所有可能的安装位置 |
-| 🛡️ **二次确认** | 防止误操作，安全卸载 |
+卸载前自动备份，重装后可完全恢复身份！
+
+```bash
+# 卸载时自动提示创建快照
+openclaw-uninstall
+
+# 📦 保存为 tar.gz（可导出到其他机器）
+# 📁 或保存到快照目录（配合 ocs 恢复）
+```
 
 ## 🚀 快速开始
 
-### 方式一：pip 安装（推荐）
+### 安装
 
 ```bash
 pip install openclaw-uninstaller
+```
+
+### 运行
+
+```bash
 openclaw-uninstall
 # 或简写
 ocu
 ```
 
-### 方式二：一键脚本
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/dukaworks/openclaw-uninstaller/main/uninstall.sh | bash
-```
-
-### 方式三：克隆运行
-
-```bash
-git clone https://github.com/dukaworks/openclaw-uninstaller.git
-cd openclaw-uninstaller
-python -m openclaw_uninstaller
-```
-
-## 📋 卸载流程
+## 📋 卸载流程（带快照保护）
 
 ```
 ┌────────────────────────────────────────────────────────────┐
 │                                                            │
-│   🛑 步骤 1/5  停止服务        🔍 查找并停止 OpenClaw      │
+│   🛑 步骤 1/4  停止服务        🔍 停止 OpenClaw 进程       │
 │   ─────────────────────────────────────────────────────   │
-│   💾 步骤 2/5  备份配置        📦 保存重要配置（可选）      │
+│   💾 步骤 2/4  创建快照        📸 备份配置（可选）          │
+│        - 📦 保存为 tar.gz（推荐，可迁移）                  │
+│        - 📁 保存到快照目录（配合 ocs）                     │
+│        - 🚫 跳过备份（危险！）                             │
 │   ─────────────────────────────────────────────────────   │
-│   📦 步骤 3/5  卸载 npm 包     🗑️  npm uninstall          │
+│   📦 步骤 3/4  卸载 npm 包     🗑️  npm uninstall          │
 │   ─────────────────────────────────────────────────────   │
-│   🗑️  步骤 4/5  删除文件        🧹  删除所有相关文件      │
-│   ─────────────────────────────────────────────────────   │
-│   🧹 步骤 5/5  清理环境        🧼  清理 PATH 和别名      │
+│   🗑️  步骤 4/4  删除文件        🧹  清理所有文件          │
 │                                                            │
-│                    ✨ 清理完成！👋 ✨                       │
+│              ✨ 卸载完成 + 快照已保存 ✨                    │
 └────────────────────────────────────────────────────────────┘
+```
+
+## 💾 快照功能详解
+
+### 选项 1：保存为 tar.gz（推荐）
+
+```
+卸载前快照
+选项:
+1. 📦 保存为 tar.gz 文件（推荐，可导出到其他机器）
+2. 📁 保存到快照目录（配合 ocs 命令恢复）
+3. 🚫 跳过备份（配置将丢失！）
+
+请选择 (1/2/3): 1
+保存路径 [/home/user/Desktop]: 
+
+       📸 ✨
+      ╱    ╲
+     │  💾  │   ← 快照已保存
+      ╲    ╱
+       ────
+   你的身份已安全存档
+   重装后可随时恢复！
+
+✅ 快照已保存!
+  📦 文件: /home/user/Desktop/openclaw_backup_20250115_143022.tar.gz
+  💾 大小: 12.5 MB
+  🔖 校验: a1b2c3d4
+```
+
+### 选项 2：保存到快照目录
+
+```
+请选择 (1/2/3): 2
+
+（保存到 ~/.openclaw_snapshots/，配合 openclaw-snapshot 工具使用）
+
+恢复命令：
+  ocs list                           # 查看快照
+  ocs restore openclaw_backup_xxx   # 恢复
+```
+
+## 🔄 完整恢复流程
+
+### 场景：卸载后重装
+
+```bash
+# 1. 卸载（已创建快照）
+openclaw-uninstall
+# → 快照保存到 ~/Desktop/openclaw_backup_xxx.tar.gz
+
+# 2. 重新安装 OpenClaw
+curl -fsSL https://openclaw.ai/install.sh | bash
+
+# 3. 安装快照工具
+pip install openclaw-snapshot
+
+# 4. 导入并恢复快照
+ocs import ~/Desktop/openclaw_backup_xxx.tar.gz
+ocs restore openclaw_backup_xxx
+
+# 5. 重启服务
+openclaw gateway restart
+
+# 🎉 一切恢复原样！
+```
+
+### 场景：迁移到新机器
+
+```bash
+# 旧机器：导出快照
+openclaw-uninstall
+# → 选择选项 1，保存到 ~/Desktop/backup.tar.gz
+scp ~/Desktop/backup.tar.gz new-machine:~/
+
+# 新机器：导入快照
+# 1. 安装 OpenClaw
+# 2. pip install openclaw-snapshot
+# 3. ocs import ~/backup.tar.gz
+# 4. ocs restore backup
+```
+
+## 🎯 命令选项
+
+```bash
+openclaw-uninstall      # 交互式卸载（推荐）
+openclaw-uninstall -y   # 自动确认（危险！）
+ocu                     # 简写命令
 ```
 
 ## 🖥️ 界面预览
@@ -73,42 +154,45 @@ $ openclaw-uninstall
 
     💥 ╔═══════════════════════════════════════╗
       ║     OpenClaw 完全卸载工具             ║
-      ║        温柔地说再见 👋                ║
+      ║      💾 先存档，再告别 👋             ║
       ╚═══════════════════════════════════════╝
 
 你好！我是卸载虾 🦞
-我会帮你彻底移除 OpenClaw
+我会帮你安全卸载 OpenClaw
+先存档，再告别，随时可以回来~
 
-发现 OpenClaw 安装在以下位置：
-  - ~/.openclaw
-  - /usr/local/bin/openclaw
-  - ~/.npm-global/lib/node_modules/openclaw
+[█░░░░░░░░░░░░░░] 步骤 2/4
+💾 创建卸载前快照
 
-⚠️  (╯°□°)╯ 等等！
-    
-    你真的要删除我吗？
-    我还可以帮你做很多事情呢...
+卸载会删除 ~/.openclaw 目录
+建议先创建快照，方便以后恢复身份
 
-卸载选项：
-1. 🗑️  完全删除（不保留配置）
-2. 💾  备份后删除（推荐）
-3. ❌  取消
+选项:
+1. 📦 保存为 tar.gz 文件（推荐，可导出到其他机器）
+2. 📁 保存到快照目录（配合 ocs 命令恢复）
+3. 🚫 跳过备份（配置将丢失！）
 
-请选择 (1/2/3): 2
+请选择 (1/2/3): 1
+保存路径 [/home/user/Desktop]: /mnt/backup
 
-[████░░░░░░░░░░░] 步骤 2/5
-💾 备份配置文件
+✅ 快照已保存!
+  📦 文件: /mnt/backup/openclaw_backup_20250115_143022.tar.gz
+  💾 大小: 12.5 MB
 
-🦐 正在处理... 🦞 加油加载... ✅ 已备份: openclaw.json
+...（卸载过程）...
 
-📦 💾 📦
-    
-    配置文件已安全备份
-    随时欢迎回来！
-    
-    🦞 "记得想我哦~"
+================================================================
+🦞 OpenClaw 已完全卸载
+================================================================
 
-✅ 清理完成！OpenClaw 已完全移除
+💾 快照已保存，以后可以恢复：
+  📦 文件: /mnt/backup/openclaw_backup_20250115_143022.tar.gz
+
+恢复方法：
+  1. 重新安装 OpenClaw
+  2. 安装快照工具: pip install openclaw-snapshot
+  3. 导入快照: ocs import /mnt/backup/openclaw_backup_xxx.tar.gz
+  4. 恢复快照: ocs restore <快照ID>
 
          🦞
         /  \
@@ -120,61 +204,70 @@ $ openclaw-uninstall
     有缘再会！
 ```
 
-## 🛠️ CLI 命令
+## 🧹 清理内容
+
+| 位置 | 内容 | 是否备份 |
+|------|------|----------|
+| `~/.openclaw` | 主配置目录 | ✅ 是 |
+| `~/.config/openclaw` | 配置缓存 | ✅ 是 |
+| `/usr/local/bin/openclaw*` | 全局命令 | ❌ 否 |
+| `~/.npm-global/` | npm 安装 | ❌ 否 |
+| Shell 配置 | PATH、别名 | ❌ 否 |
+
+## 🔄 与其他工具配合使用
 
 ```bash
-openclaw-uninstall      # 交互式卸载
-openclaw-uninstall -y   # 自动确认（危险！）
-openclaw-uninstall --backup-only  # 仅备份
-ocu                     # 简写命令
+# 1. 部署工具安装
+openclaw-feishu deploy
+
+# 2. 快照工具备份
+ocs create  # 创建当前状态快照
+
+# 3. 卸载工具（带快照）
+openclaw-uninstall  # 卸载前自动备份
+
+# 4. 重装后恢复
+ocs import xxx.tar.gz
+ocs restore xxx
 ```
 
-## 🔍 会清理什么？
+## 📦 快照文件结构
 
-| 位置 | 内容 |
-|------|------|
-| `~/.openclaw` | 主配置目录 |
-| `/usr/local/bin/openclaw*` | 全局命令 |
-| `~/.npm-global/` | npm 全局安装 |
-| `~/.config/openclaw` | 配置缓存 |
-| Shell 配置文件 | PATH、别名 |
-| 运行中的进程 | Gateway 服务 |
-
-## 💾 备份内容
-
-选择备份后会保存：
-- `openclaw.json` - 主配置
-- `credentials/` - 凭证信息
-- `identity/` - 身份配置
-- `backup_info.json` - 备份元数据
-
-备份位置：`~/.openclaw_backup/openclaw_backup_YYYYMMDD_HHMMSS/`
+```
+openclaw_backup_20250115_143022/
+├── snapshot.json           # 元数据（时间、大小、校验和）
+└── openclaw_data/          # 完整的 ~/.openclaw 目录
+    ├── openclaw.json
+    ├── config/
+    ├── credentials/
+    ├── identity/
+    └── ...
+```
 
 ## 🐛 常见问题
 
-### Q: 卸载后想重新安装？
+### Q: 恢复快照后身份验证失败？
 ```bash
-# 没问题！随时欢迎回来
-curl -fsSL https://openclaw.ai/install.sh | bash
+# 检查恢复后的文件权限
+ls -la ~/.openclaw/credentials/
+
+# 可能需要重新授权某些服务
+openclaw config
 ```
 
-### Q: 删除后还有残留？
+### Q: 快照文件太大？
 ```bash
-# 手动检查这些位置
-ls -la ~/.openclaw
-ls -la ~/.npm-global/bin/openclaw*
-which openclaw
+# 快照已自动排除日志和缓存
+# 如果还是很大，可以手动清理后再卸载：
+rm -rf ~/.openclaw/logs/
+rm -rf ~/.openclaw/media/
 ```
 
-### Q: 如何恢复备份？
+### Q: 跨系统恢复（如 Linux → macOS）？
 ```bash
-# 备份在 ~/.openclaw_backup/
-cp -r ~/.openclaw_backup/openclaw_backup_xxx/* ~/.openclaw/
+# 完全支持！快照是跨平台的
+# 注意：绝对路径配置可能需要手动调整
 ```
-
-## 🤝 贡献
-
-欢迎提交 PR！让卸载也变得可爱 🦞
 
 ## 📄 许可证
 
