@@ -3,38 +3,31 @@
 [![PyPI version](https://img.shields.io/pypi/v/openclaw-uninstaller.svg)](https://pypi.org/project/openclaw-uninstaller/)
 [![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)](https://python.org)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![OpenClaw](https://img.shields.io/badge/OpenClaw-卸载工具-pink.svg)](https://openclaw.ai)
-[![GitHub stars](https://img.shields.io/github/stars/dukaworks/openclaw-uninstaller.svg?style=social)](https://github.com/dukaworks/openclaw-uninstaller/stargazers)
 
-> **卸载虾出品** 🦞  
-> 温柔地说再见，彻底卸载 OpenClaw
+> **卸载虾出品** 🦞💥  
+> 一键彻底卸载 OpenClaw - 温柔地说再见
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/dukaworks/openclaw-uninstaller/main/assets/goodbye.png" alt="Goodbye" width="400">
+  <img src="https://raw.githubusercontent.com/dukaworks/openclaw-uninstaller/main/assets/goodbye.gif" alt="Goodbye" width="400">
 </p>
 
-## ✨ 为什么要用卸载虾？
+## ✨ 特性
 
-OpenClaw 是个好东西，但有时候你需要：
-- 🧹 彻底清理重装
-- 💾 迁移到新机器
-- 🗑️ 暂时告别（还会回来的对吧？）
-
-卸载虾会帮你：
-- ✅ **彻底清理** - 删除所有文件、配置、环境变量
-- 💾 **安全备份** - 保留配置，随时恢复
-- 🛑 **停止服务** - 自动停止所有运行中的进程
-- 🧹 **清理残留** - npm 包、缓存、shell 配置
+| 特性 | 描述 |
+|------|------|
+| 🦞 **可爱的 CLI** | 彩色界面 + 动画效果，卸载也能很有趣 |
+| 💾 **智能备份** | 自动备份配置，随时欢迎回来 |
+| 🧹 **彻底清理** | 删除所有文件、服务、环境变量 |
+| 🛑 **安全停止** | 自动停止运行中的服务 |
+| 🔍 **残留检测** | 扫描所有可能的安装位置 |
+| 🛡️ **二次确认** | 防止误操作，安全卸载 |
 
 ## 🚀 快速开始
 
 ### 方式一：pip 安装（推荐）
 
 ```bash
-# 安装
 pip install openclaw-uninstaller
-
-# 运行
 openclaw-uninstall
 # 或简写
 ocu
@@ -51,27 +44,25 @@ curl -fsSL https://raw.githubusercontent.com/dukaworks/openclaw-uninstaller/main
 ```bash
 git clone https://github.com/dukaworks/openclaw-uninstaller.git
 cd openclaw-uninstaller
-pip install -r requirements.txt
 python -m openclaw_uninstaller
 ```
 
-## 🦞 卸载流程（有仪式感地告别）
+## 📋 卸载流程
 
 ```
 ┌────────────────────────────────────────────────────────────┐
 │                                                            │
-│   🦞 步骤 1/5  停止服务        🛑 温柔地停止所有进程       │
+│   🛑 步骤 1/5  停止服务        🔍 查找并停止 OpenClaw      │
 │   ─────────────────────────────────────────────────────   │
-│   💾 步骤 2/5  备份配置        📦 保留你的设置（可选）     │
+│   💾 步骤 2/5  备份配置        📦 保存重要配置（可选）      │
 │   ─────────────────────────────────────────────────────   │
-│   📦 步骤 3/5  卸载 npm 包     🗑️  移除全局安装          │
+│   📦 步骤 3/5  卸载 npm 包     🗑️  npm uninstall          │
 │   ─────────────────────────────────────────────────────   │
-│   🗑️  步骤 4/5  删除文件       💥 清理所有目录           │
+│   🗑️  步骤 4/5  删除文件        🧹  删除所有相关文件      │
 │   ─────────────────────────────────────────────────────   │
-│   🧹 步骤 5/5  清理环境        ✨ 移除环境变量            │
+│   🧹 步骤 5/5  清理环境        🧼  清理 PATH 和别名      │
 │                                                            │
-│                    🎉 再见，OpenClaw！                     │
-│                                                            │
+│                    ✨ 清理完成！👋 ✨                       │
 └────────────────────────────────────────────────────────────┘
 ```
 
@@ -93,7 +84,7 @@ $ openclaw-uninstall
   - /usr/local/bin/openclaw
   - ~/.npm-global/lib/node_modules/openclaw
 
-    ⚠️  (╯°□°)╯ 等等！
+⚠️  (╯°□°)╯ 等等！
     
     你真的要删除我吗？
     我还可以帮你做很多事情呢...
@@ -105,127 +96,95 @@ $ openclaw-uninstall
 
 请选择 (1/2/3): 2
 
-[█░░░░░░░░░░░░░░] 步骤 1/5
-🛑 停止 OpenClaw 服务
-
-✅ 所有 OpenClaw 服务已停止
-
-[██░░░░░░░░░░░░░] 步骤 2/5
+[████░░░░░░░░░░░] 步骤 2/5
 💾 备份配置文件
 
-✅ 配置已备份到: ~/.openclaw_backup/openclaw_backup_20250226_143000
+🦐 正在处理... 🦞 加油加载... ✅ 已备份: openclaw.json
 
-    📦 💾 📦
+📦 💾 📦
     
     配置文件已安全备份
     随时欢迎回来！
     
     🦞 "记得想我哦~"
 
-...
+✅ 清理完成！OpenClaw 已完全移除
 
          🦞
         /  \
        │ 👋 │   ← 挥手告别
-        \\  /
+        \  /
          🦞
     
     ✨ 感谢陪伴 ✨
     有缘再会！
-    
-    OpenClaw 已完全移除
 ```
-
-## 📋 清理内容清单
-
-| 类型 | 内容 |
-|------|------|
-| **主目录** | `~/.openclaw` - 所有配置和数据 |
-| **全局命令** | `/usr/local/bin/openclaw` 等 |
-| **npm 包** | `openclaw`, `clawhub` 全局安装 |
-| **缓存** | npx 缓存、npm 缓存 |
-| **配置目录** | macOS/Windows 特定配置路径 |
-| **环境变量** | `.bashrc`, `.zshrc` 中的 PATH |
-| **进程** | 所有运行中的 OpenClaw 进程 |
 
 ## 🛠️ CLI 命令
 
 ```bash
-# 交互式卸载（推荐）
-openclaw-uninstall
-ocu
-
-# 快速卸载（不备份，直接删）
-ocu --force
-
-# 仅备份配置
-ocu --backup-only
-
-# 查看会删除什么（预览模式）
-ocu --dry-run
-
-# 查看帮助
-ocu --help
+openclaw-uninstall      # 交互式卸载
+openclaw-uninstall -y   # 自动确认（危险！）
+openclaw-uninstall --backup-only  # 仅备份
+ocu                     # 简写命令
 ```
+
+## 🔍 会清理什么？
+
+| 位置 | 内容 |
+|------|------|
+| `~/.openclaw` | 主配置目录 |
+| `/usr/local/bin/openclaw*` | 全局命令 |
+| `~/.npm-global/` | npm 全局安装 |
+| `~/.config/openclaw` | 配置缓存 |
+| Shell 配置文件 | PATH、别名 |
+| 运行中的进程 | Gateway 服务 |
+
+## 💾 备份内容
+
+选择备份后会保存：
+- `openclaw.json` - 主配置
+- `credentials/` - 凭证信息
+- `identity/` - 身份配置
+- `backup_info.json` - 备份元数据
+
+备份位置：`~/.openclaw_backup/openclaw_backup_YYYYMMDD_HHMMSS/`
 
 ## 🐛 常见问题
 
-### Q: 卸载后想恢复怎么办？
-
-如果选择了备份选项，配置文件会保存在 `~/.openclaw_backup/`。重新安装后，可以手动复制回去。
-
+### Q: 卸载后想重新安装？
 ```bash
-# 查看备份
-ls ~/.openclaw_backup/
+# 没问题！随时欢迎回来
+curl -fsSL https://openclaw.ai/install.sh | bash
+```
 
-# 恢复配置（重新安装后）
+### Q: 删除后还有残留？
+```bash
+# 手动检查这些位置
+ls -la ~/.openclaw
+ls -la ~/.npm-global/bin/openclaw*
+which openclaw
+```
+
+### Q: 如何恢复备份？
+```bash
+# 备份在 ~/.openclaw_backup/
 cp -r ~/.openclaw_backup/openclaw_backup_xxx/* ~/.openclaw/
 ```
 
-### Q: 卸载不彻底？
-
-可能需要 `sudo` 权限删除某些系统路径：
-
-```bash
-sudo ocu
-```
-
-### Q: 误删了怎么办？
-
-如果备份了，配置可以恢复。如果没有备份... 🦞 卸载虾只能帮你到这里了。
-
 ## 🤝 贡献
 
-欢迎提交 Issue 和 PR！
+欢迎提交 PR！让卸载也变得可爱 🦞
 
-### 新功能想法
+## 📄 许可证
 
-- [ ] GUI 界面（Tkinter/Qt）
-- [ ] 定时自动卸载（？）
-- [ ] 卸载后自动重装最新版
-- [ ] 卸载仪式动画（烟花效果）
-
-## 📊 相关项目
-
-- 🦞 [OpenClaw Feishu Deployer](https://github.com/dukaworks/openclaw-feishu-deployer) - 一键部署
-- 🏠 [OpenClaw 官网](https://openclaw.ai)
-- 📚 [OpenClaw 文档](https://docs.openclaw.ai)
-
-## 📝 更新日志
-
-查看 [CHANGELOG.md](CHANGELOG.md)
-
-## ⚖️ 许可证
-
-[MIT License](LICENSE) © 2025 Duka Works
+MIT License © 2025 Duka Works
 
 ---
 
 <p align="center">
+  🦞💥 <strong>Made with love by 卸载虾</strong> 🦞💥
   <br>
-  🦞 <strong>卸载虾说："再见是为了更好的重逢"</strong> 🦞
-  <br><br>
   <a href="https://github.com/dukaworks/openclaw-uninstaller">GitHub</a> •
-  <a href="https://pypi.org/project/openclaw-uninstaller">PyPI</a> •
-  <a href="https://openclaw.ai">OpenClaw</a>
+  <a href="https://pypi.org/project/openclaw-uninstaller">PyPI</a>
 </p>
